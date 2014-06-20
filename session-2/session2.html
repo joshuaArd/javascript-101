@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Form Creation</title>
+    
+    <style>
+        input {
+            width: 200px;
+            margin-bottom: 6px;
+        }
+        input[type="color"] {
+            width: 50px;
+            height: 50px;
+            -webkit-border-radius: 4px;;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            width: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body id="body" onload="writeForm();">
+</body>
+    <script>       
+        function writeForm() {
+
+            //Create Form Elements
+            var form = document.createElement('form'),
+                name = document.createElement('input'),
+                telNumber = document.createElement('input'),
+                email = document.createElement('input'),
+                color = document.createElement('input'),
+                colorPicker = document.createElement('input'),
+                submit = document.createElement('input'),
+                body = document.getElementById('body'),
+                formElements = [name, telNumber, email, color, colorPicker,  submit];
+
+            //Set Form Element Attributes
+            setAttributes(form, {'method': 'POST', 'action': '/my/formData'})
+            setAttributes(name, {'type': 'text', 'placeholder': 'Name', 'required': ''}); 
+            setAttributes(telNumber, {'type': 'tel', 'placeholder': 'Telephone (###-####)'});
+            setAttributes(email, {'type': 'email', 'placeholder': 'Email', 'required': ''});
+            setAttributes(color, {'type': 'text', 'placeholder': 'Favorite Color'});
+            setAttributes(colorPicker, {'type': 'color'});
+            setAttributes(submit, {'type': 'submit'})
+
+            //Draw Form
+            body.appendChild(form);           
+            drawForm(formElements, form);
+            var colorPickerHelp = document.createElement('p');
+            colorPicker.appendChild(colorPickerHelp);
+        }       
+
+        function setAttributes(el, attrs) {
+            for(var key in attrs) {
+                el.setAttribute(key, attrs[key]);
+            }
+        }
+
+        function drawForm(formElements, form) {
+            for (var i = 0; i < formElements.length; i++) {
+                form.appendChild(formElements[i]);
+                var br = document.createElement('br');
+                form.appendChild(br);
+            }    
+        }       
+    </script>
+</html>
